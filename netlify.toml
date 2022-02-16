@@ -1,0 +1,23 @@
+[build]
+    command = "npm run build"
+    publish = "dist"
+    functions = "functions"
+
+[dev]
+    command = "npm run dev"
+    port = 5000
+    targetPort = 3000
+    publish = "dist"
+    autoLaunch = false
+    framework = "#custom"
+    functions = "functions"
+
+[[redirects]]
+    from = "/api/*"
+    to = "/.netlify/functions/:splat"
+    status = 200
+
+[[plugins]]
+# Allow netlify functions to access netlify build time environment variables.
+# See https://www.npmjs.com/package/netlify-plugin-inline-functions-env
+package = "netlify-plugin-inline-functions-env"
